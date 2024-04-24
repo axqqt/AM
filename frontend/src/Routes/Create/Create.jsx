@@ -4,7 +4,7 @@ import Axios from "axios";
 
 const Create = () => {
   const { loading, setLoading, BASE } = useContext(UserContext);
-  const [send, setSend] = useState({});
+  const [send, setSend] = useState({title:"", description:"", video:[], link:""});
 
   async function AddContent(e) {
     e.preventDefault();
@@ -26,9 +26,10 @@ const Create = () => {
     <div>
       <h1>Add Content</h1>
       <form onSubmit={AddContent}>
-        <input name="" placeholder="" type="text" onChange={handleChange}></input>
-        <input name="" placeholder="" type="text" onChange={handleChange}></input>
-        <input name="" placeholder="" type="text" onChange={handleChange}></input>
+        <input name="title" placeholder="Enter title" type="text" onChange={handleChange}></input>
+        <input name="description" placeholder="Enter description" type="text" onChange={handleChange}></input>
+        {/* <input name="video" placeholder="Enter " type="file" onChange={handleChange}></input> */}
+        <input name="link" placeholder="Enter Link" type="text" onChange={handleChange}></input>
         <button type="submit" disabled={loading}>Add</button>
       </form>
     </div>
