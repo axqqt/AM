@@ -7,12 +7,13 @@ import NotFound from "./Routes/NotFound/NotFound";
 import Register from "./Routes/Manage/Register/Register";
 import Login from "./Routes/Manage/Login/Login";
 import Nav from "./Routes/Navbar/Nav";
+import Create from "./Routes/Create/Create";
 
 export const UserContext = createContext();
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState({ gmail: "", password: "" });
+  const [company, setCompany] = useState({ gmail: "qwtqt", password: "" });
   const [status, setStatus] = useState("");
   const BASE = "http://localhost:8000";
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            {company.gmail && <Route path="/create" element={<Create/>}></Route>}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </UserContext.Provider>
