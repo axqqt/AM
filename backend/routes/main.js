@@ -29,3 +29,5 @@ Router.route("/")
       console.error(err);
     }
   });
+
+  module.exports = Router;

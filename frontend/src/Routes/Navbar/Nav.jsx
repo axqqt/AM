@@ -9,13 +9,14 @@ const Nav = () => {
   return (
     <ul>
       <Link to={"/"}>Home</Link>
-      {!company.gmail && (
+      {!company.gmail ? (
         <div>
           <Link to={"/login"}>Login</Link>
           <Link to={"/register"}>Register</Link>
         </div>
+      ) : (
+        <Link path="/create" element={<Create />}></Link>
       )}
-      {company.gmail && <Link path="/create" element={<Create />}></Link>}
     </ul>
   );
 };

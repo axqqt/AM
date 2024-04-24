@@ -28,7 +28,7 @@ const Create = () => {
       <form onSubmit={AddContent}>
         <input name="title" placeholder="Enter title" type="text" onChange={handleChange}></input>
         <input name="description" placeholder="Enter description" type="text" onChange={handleChange}></input>
-        {/* <input name="video" placeholder="Enter " type="file" onChange={handleChange}></input> */}
+        <input name="video" placeholder="Enter Video" type="file" onChange={handleChange}></input>
         <input name="link" placeholder="Enter Link" type="text" onChange={handleChange}></input>
         <button type="submit" disabled={loading}>Add</button>
       </form>
