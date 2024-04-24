@@ -7,30 +7,32 @@ import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   const { loading, setLoading, status, setStatus, BASE } =
     useContext(UserContext);
-  const [creds, setCreds] = useState({
-    gmail:""
-  });
+  const [gmail, setGmail] = useState("");
 
-  useEffect(()=>{
-    console.log(`${creds.admin ? "Admin" : "Not"}`)
-  },[creds.admin])
 
   const navigator = useNavigate();
 
   async function userRegister(e) {
     e.preventDefault();
+    setStatus("");
     try {
       setLoading(true);
-      const response = await Axios.post(`${BASE}/users/register`, { creds });
+      const response = await Axios.post(`${BASE}/users/register`, { gmail });
       if (response.status === 201) {
         setStatus("Registration Complete, Please login to continue!");
         setTimeout(() => {
           navigator("/login");
           setStatus("");
         }, 1200);
+      } else if(response.status===409){
+        setStatus(`${gmail} already taken!`)
       }
+  
     } catch (err) {
-      setStatus("Error registering user");
+      // if(err.status===409){
+      //   setStatus(`${gmail} already taken!`)
+      // }
+  
       console.error(err);
     } finally {
       setLoading(false);
@@ -38,9 +40,6 @@ const Register = () => {
   }
   
 
-  const handleChange = (e) => {
-    setCreds({ ...creds, [e.target.name]: e.target.value });
-  };
 
   return (
     <div>
@@ -48,7 +47,7 @@ const Register = () => {
         <h1>Register</h1>
         <form onSubmit={userRegister}>
           <input
-            onChange={handleChange}
+            onChange={(e)=>{setGmail(e.target.value)}}
             name="gmail"
             placeholder="Enter gmail..."
           ></input>

@@ -19,6 +19,8 @@ Router.route("/register")
             }else{
                 return res.status(400).json({Alert:"Error!"})
             }
+        }else{
+          return res.status(409).json({Alert:"Conflict"})
         }
     }catch(err){
         console.error(err);
@@ -28,7 +30,8 @@ Router.route("/register")
  
   Router.route("/login").post(async (req,res)=>{
     const { gmail,password } = req?.body;
-    if ((!gmail || !password))
+    console.log(password)
+    if (!gmail || !password)
       return res.status(400).json({ Alert: "Username AND Password required" });
 
     try{
