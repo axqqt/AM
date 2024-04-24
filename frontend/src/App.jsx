@@ -13,7 +13,7 @@ export const UserContext = createContext();
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState({ gmail: "qwtqt", password: "" });
+  const [company, setCompany] = useState({ gmail: "", password: "" });
   const [status, setStatus] = useState("");
   const BASE = "http://localhost:8000";
 
