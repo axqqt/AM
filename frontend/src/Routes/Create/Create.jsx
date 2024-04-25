@@ -37,7 +37,10 @@ const Create = () => {
   const handleChange = (e) => {
     if (e.target.name === "video") {
       // Bind the file to video.link
-      setFormData({ ...formData, video: { ...formData.video, link: e.target.files[0] } });
+      setFormData({
+        ...formData,
+        video: { ...formData.video, link: e.target.files[0] },
+      });
     } else if (e.target.name === "timestamps") {
       // Handle changes in the timestamps array
       const timestamps = [...formData.video.timestamps];
@@ -47,23 +50,50 @@ const Create = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
-
   return (
     <div>
       <h1>Add Content</h1>
       <form onSubmit={AddContent}>
-        <input name="title" placeholder="Enter title" type="text" value={formData.title} onChange={handleChange}></input>
-        <input name="description" placeholder="Enter description" type="text" value={formData.description} onChange={handleChange}></input>
-        <select name="category" value={formData.category} onChange={handleChange}>
+        <input
+          name="title"
+          placeholder="Enter title"
+          type="text"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        ></input>
+        <input
+          name="description"
+          placeholder="Enter description"
+          type="text"
+          value={formData.description}
+          onChange={handleChange}
+          required
+        ></input>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
           <option value="">Select category</option>
-          <option value="Category 1">Category 1</option>
-          <option value="Category 2">Category 2</option>
-          <option value="Category 3">Category 3</option>
+          <option value="clothing">Clothing</option>
+          <option value="health">Health Care</option>
+          <option value="beauty">Beauty</option>
           {/* Add more options as needed */}
         </select>
         <div className="video">
-          <label>Video must contain clear instructions and accurate timestamps </label>
-          <input name="video" placeholder="Enter Video" type="file" onChange={handleChange}></input>
+          <label>
+            Video must contain clear instructions and accurate timestamps{" "}
+          </label>
+          <label>Select Category</label>
+          <input
+            name="video"
+            placeholder="Enter Video"
+            type="file"
+            onChange={handleChange}
+           
+          ></input>
         </div>
         {/* Render input fields for content points */}
         {formData.video.timestamps.map((point, index) => (
@@ -75,10 +105,20 @@ const Create = () => {
             type="text"
             value={point}
             onChange={handleChange}
+            required
           />
         ))}
-        <input name="link" placeholder="Enter Link" type="text" value={formData.link} onChange={handleChange}></input>
-        <button type="submit" disabled={loading}>Add</button>
+        <input
+          name="link"
+          placeholder="Enter Link"
+          type="text"
+          value={formData.link}
+          onChange={handleChange}
+          required
+        ></input>
+        <button type="submit" disabled={loading}>
+          Add
+        </button>
       </form>
     </div>
   );

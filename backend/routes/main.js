@@ -5,12 +5,10 @@ const multer = require("multer");
 // const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 
-
-
-cloudinary.config({ 
-  cloud_name: 'dsto9mmt0', 
-  api_key: '857482966483428', 
-  api_secret: 'Vry5wv5flNncSsA3t6km4SQcGnM' 
+cloudinary.config({
+  cloud_name: "dsto9mmt0",
+  api_key: "857482966483428",
+  api_secret: "Vry5wv5flNncSsA3t6km4SQcGnM",
 });
 
 // const storage = new CloudinaryStorage({
@@ -24,10 +22,10 @@ cloudinary.config({
 // const upload = multer({ storage: storage });
 
 Router.route("/")
-  .post( async (req, res) => {
+  .post(async (req, res) => {
     // Check if required fields are provided
-    const { title, description, link,category } = req.body;
-    if (!title || !description  || !link , !category)
+    const { title, description, link, category } = req.body;
+    if ((!title || !description || !link, !category))
       return res.status(400).json({ Alert: "Required fields not filled" });
 
     try {
@@ -35,7 +33,7 @@ Router.route("/")
       // const videoUrl = req.file.path; // Cloudinary will provide the URL to the uploaded video
 
       // Create the document in the database
-      await mainModel.create({title, description, link,category});
+      await mainModel.create({ title, description, link, category });
       return res.status(201).json({ Alert: "Created" });
     } catch (err) {
       console.error(err);
@@ -43,17 +41,34 @@ Router.route("/")
     }
   })
   .get(async (req, res) => {
-    try {
-      const data = await mainModel.find();
-      if (data && data.length) {
-        return res.status(200).json(data);
-      } else {
-        return res.status(404).json({ Alert: "No results found" });
+    const selectedType = req?.params?.type;
+    if (!selectedType) {
+      try {
+        const data = await mainModel.find();
+        if (data && data.length) {
+          return res.status(200).json(data);
+        } else {
+          return res.status(404).json({ Alert: "No results found" });
+        }
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ Error: err });
       }
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ Error: err });
+    } else {
+      try {
+        const data = await mainModel.aggregate([{ $match: { category: selectedType } }]);
+        if (data && data.length) {
+          return res.status(200).json(data);
+        } else {
+          return res.status(404).json({ Alert: "No results found" });
+        }
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ Error: err });
+      }
     }
   });
+  
+  
 
 module.exports = Router;

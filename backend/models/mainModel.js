@@ -24,7 +24,7 @@ const mainSchema = new mongoose.Schema({
     },
     category:{
         type:String,
-        default:"default",
+        default:"all",
         min:5,trim:true,max:20
     },
     commission:{
