@@ -10,7 +10,7 @@ const Feedback = () => {
   async function AddFeedback(e) {
     e.preventDefault();
     try {
-      await Axios.post(`${BASE}/feedbacks`, feedback).then((response) => {
+      await Axios.post(`${BASE}/feedbacks`, {feedback}).then((response) => {
         if (response.status === 201) {
           setTimeout(() => {
             setStatus("Thank you for your feedback");

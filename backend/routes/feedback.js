@@ -11,11 +11,9 @@ Router.route("/").post(async (req,res)=>{
 
     try{
         const newFeedback = await feedbackModel.create(req.body);
-        if(newFeedback){
+        
             return res.status(201).json({Alert:`${feedback} Added`})
-        }else{
-            return res.status(403).json({Alert:"Error while adding feedback"})
-        }
+     
     }catch(err){    
         console.error(err);
         return res.status(500).json({Error:err.message})
