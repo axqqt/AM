@@ -92,7 +92,7 @@ const Login = () => {
           </button>
         </form>
         <div className="mt-4 text-center">
-          <p className="text-gray-600">{status}</p>
+          <h1 className="text-gray-600">{status}</h1>
           <Link to="/register" className="text-blue-500 hover:underline">
             {" "}
             Not registered?
