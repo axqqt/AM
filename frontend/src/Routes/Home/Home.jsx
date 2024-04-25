@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import "./Home.css"
 
 const Home = () => {
   const { company, loading, setLoading, BASE, status, setStatus } =
@@ -54,9 +55,9 @@ const Home = () => {
           {data.length > 0 ? (
             data.map((item) => (
               <div key={item._id} className="container" style={{margin:"40px"}}>
-                <h1>{item.title}</h1>
+                <h1 >{item.title}</h1>
                 <h2>{item.description}</h2>
-                <h3>{item.commission}</h3>
+                <h3 style={{color:"black"}}> Commission rate : {item.commission}</h3>
                 <video width="320" height="240" controls>
                   <source src={item.video} type="video/mp4" />
                   Your browser does not support the video tag.
