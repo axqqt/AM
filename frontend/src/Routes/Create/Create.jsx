@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { UserContext } from "../../App";
 import Axios from "axios";
 
 const Create = () => {
-  const { loading, setLoading, BASE } = useContext(UserContext);
+  const { loading, setLoading, BASE,status,setStatus} = useContext(UserContext);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -26,7 +27,7 @@ const Create = () => {
       formData.timestamps.forEach((point, index) => {
         formDataToSend.append(`timestamps[${index}]`, point);
       });
-      await Axios.post(`${BASE}/mains`, formDataToSend);
+      await Axios.post(`${BASE}/mains`, formDataToSend).then((response)=>{if(response.status===201){setStatus("Content Added")}else if(response.status===400){setStatus("Required fields not filled")}});
     } catch (err) {
       console.error(err);
     } finally {
@@ -134,6 +135,7 @@ const Create = () => {
           Add
         </button>
       </form>
+      <h2>{status}</h2>
     </div>
   );
 };
