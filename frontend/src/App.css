@@ -2,4 +2,10 @@
 
 *{
   font-family: 'Poppins', Courier, monospace;
+  text-align: center;
+}
+
+
+.card{
+border: 12px solid purple;
 }
