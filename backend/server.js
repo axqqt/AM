@@ -12,7 +12,7 @@ app.use(cors({origin:"*"}))
 
 app.use("/mains",require("./routes/main"))
 app.use('/users',require("./routes/users")) //done
-
+app.use('/feedbacks',require("./routes/feedback"))
 
 
 app.listen(process.env.PORT,async ()=>{
