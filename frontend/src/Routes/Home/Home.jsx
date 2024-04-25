@@ -41,7 +41,7 @@ const Home = () => {
   return (
     <div className="company">
     
-      <h1>{company.gmail ? `Welcome Back! ${company.gmail}👋🏻` : "Welcome to Affiliated 💸"}</h1>
+      <h1>{company.gmail ? `Welcome Back ${company.gmail}!👋🏻` : "Welcome to Affiliated 💸"}</h1>
       <div className="selector">
         <select value={selectedType} onChange={handleTypeChange}>
           <option value="all">Select type</option>
