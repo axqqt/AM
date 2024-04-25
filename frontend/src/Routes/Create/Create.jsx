@@ -1,10 +1,11 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { UserContext } from "../../App";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-  const { loading, setLoading, BASE,status,setStatus} = useContext(UserContext);
+  const { loading, setLoading, BASE, status, setStatus } =
+    useContext(UserContext);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -12,7 +13,10 @@ const Create = () => {
     timestamps: [],
     link: "",
     category: "",
+    commission: "", // Adding commission field
   });
+
+  const navigator = useNavigate();
 
   async function addContent(e) {
     e.preventDefault();
@@ -24,10 +28,18 @@ const Create = () => {
       formDataToSend.append("video", formData.video);
       formDataToSend.append("link", formData.link);
       formDataToSend.append("category", formData.category);
+      formDataToSend.append("commission", formData.commission); // Appending commission data
       formData.timestamps.forEach((point, index) => {
         formDataToSend.append(`timestamps[${index}]`, point);
       });
-      await Axios.post(`${BASE}/mains`, formDataToSend).then((response)=>{if(response.status===201){setStatus("Content Added")}else if(response.status===400){setStatus("Required fields not filled")}});
+      await Axios.post(`${BASE}/mains`, formDataToSend).then((response) => {
+        if (response.status === 201) {
+          setStatus("Content Added");
+          navigator("/");
+        } else if (response.status === 400) {
+          setStatus("Required fields not filled");
+        }
+      });
     } catch (err) {
       console.error(err);
     } finally {
@@ -127,6 +139,17 @@ const Create = () => {
             placeholder="Enter Link"
             type="text"
             value={formData.link}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Commission:</label> {/* Adding commission input field */}
+          <input
+            name="commission"
+            placeholder="Enter Commission"
+            type="text"
+            value={formData.commission}
             onChange={handleChange}
             required
           />

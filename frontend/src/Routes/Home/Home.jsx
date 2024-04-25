@@ -4,13 +4,12 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Feedback from "../Feedback/Feedback";
-// import ReactSpinner from 'react-spinner'; // Import the spinner component
 
 const Home = () => {
   const { company, loading, setLoading, BASE, status, setStatus } =
     useContext(UserContext);
   const [data, setData] = useState([]);
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState("all"); // Set default value to "all"
 
   async function fetchContent() {
     try {
@@ -42,7 +41,7 @@ const Home = () => {
   return (
     <div className="company" id="top">
       {company.gmail && <Link to={"/create"}>ADD YOUR LISTINGS!</Link>}
-      <a href={"#feedback"}>Feedback</a>
+      <a href={"#feedback"}>Provide Your Valuable Feedback!</a>
       <h1>
         {company.gmail
           ? `Welcome Back ${company.gmail.split("@")[0]}!👋🏻`
@@ -96,13 +95,10 @@ const Home = () => {
       <h2>{status}</h2>
   
       <div className="footer">
-        <div className="footer">
-          <Feedback />
-        </div>
+        <Feedback />
       </div>
     </div>
   );
-  
 };
 
 export default Home;

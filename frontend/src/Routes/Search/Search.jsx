@@ -29,7 +29,7 @@ const Search = () => {
   }
 
   return (
-    <div>
+    <div style={{margin:"40px"}}>
       <h1>Search</h1>
       <form onSubmit={Search}>
         <input

@@ -16,11 +16,7 @@ const Nav = () => {
           <Link to={"/register"}>Register</Link>
         </div>
       )}
-      {company.gmail && (
-        <Link path="/create">
-          Add Listing
-        </Link>
-      )}
+      {company?.gmail && <Link to="/create">Add Listing</Link>}
     </ul>
   );
 };

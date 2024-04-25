@@ -9,6 +9,7 @@ import Login from "./Routes/Manage/Login/Login";
 import Nav from "./Routes/Navbar/Nav";
 import Create from "./Routes/Create/Create";
 import Search from "./Routes/Search/Search";
+import Logo from "./Routes/Logo/Logo";
 
 export const UserContext = createContext();
 
@@ -38,6 +39,7 @@ function App() {
     <>
       <BrowserRouter>
         <UserContext.Provider value={theStates}>
+          <Logo/>
           <Nav />
           <Search />
           <Routes>
