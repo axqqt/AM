@@ -59,40 +59,40 @@ const Home = () => {
       {loading ? (
         "Loading..."
       ) : (
-        <div className="card">
-          {data.length > 0 ? (
-            data.map((item) => (
-              <div
-                key={item._id}
-                className="container"
-                style={{ margin: "40px" }}
-              >
-                <h1>{item.title}</h1>
-                <h2>{item.description}</h2>
-                <h3 style={{ color: "black" }}>
-                  {" "}
-                  Commission rate : {item.commission}
-                </h3>
-                <div className="vid">
-                  <video width="320" height="240" controls>
-                    <source src={item.video.link} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                  <div className="timestamps">
-                    <h1>{item.video.timstamps}</h1>
-                  </div>
-                </div>
-                {item.video.link && (
-                  <Link
-                    to={item.video.link}
-                  >{`Click here to get started with ${item.title}`}</Link>
-                )}
-              </div>
-            ))
-          ) : (
-            <h1>No results found</h1>
-          )}
+<div className="card-container">
+  {data.length > 0 ? (
+    data.map((item) => (
+      <div
+        key={item._id}
+        className="card"
+        style={{ margin: "40px" }}
+      >
+        <h1>{item.title}</h1>
+        <h2>{item.description}</h2>
+        <h3 style={{ color: "black" }}>
+          Commission rate: {item.commission}
+        </h3>
+        <div className="vid">
+          <video width="320" height="240" controls>
+            <source src={item.video.link} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="timestamps">
+            <h1>{item.video.timstamps}</h1>
+          </div>
         </div>
+        {item.video.link && (
+          <Link
+            to={item.video.link}
+          >{`Click here to get started with ${item.title}`}</Link>
+        )}
+      </div>
+    ))
+  ) : (
+    <h1>No results found</h1>
+  )}
+</div>
+
       )}
       <h2>{status}</h2>
 

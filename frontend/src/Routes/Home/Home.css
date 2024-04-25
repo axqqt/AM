@@ -13,6 +13,20 @@ body {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    width: 300px; /* Adjust as needed */
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
   
   h1, h2, h3 {
     color: #333;
@@ -30,12 +44,7 @@ body {
     border-radius: 4px;
   }
   
-  /* Card styles */
-  .card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+ 
   
   .container {
     max-width: 300px;
