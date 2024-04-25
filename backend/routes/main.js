@@ -23,22 +23,25 @@ cloudinary.config({
 
 Router.route("/")
   .post(async (req, res) => {
-    // Check if required fields are provided
-    const { title, description, link, category } = req.body;
-    if ((!title || !description || !link, !category))
-      return res.status(400).json({ Alert: "Required fields not filled" });
+  // Check if required fields are provided
+  const { title, description, link, category } = req.body;
+  const { file:video } = req;
 
-    try {
-      // Cloudinary will automatically upload the video and provide its URL
-      // const videoUrl = req.file.path; // Cloudinary will provide the URL to the uploaded video
+  if (!title || !description || !link || !category || !video)
+    return res.status(400).json({ Alert: "Required fields not filled" });
 
-      // Create the document in the database
-      await mainModel.create({ title, description, link, category });
-      return res.status(201).json({ Alert: "Created" });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ Error: err });
-    }
+  try {
+    // Upload video to Cloudinary
+    const result = await cloudinary.uploader.upload(video.path, { resource_type: 'video' });
+    const videoUrl = result.secure_url;
+
+    // Create the document in the database
+    await mainModel.create({ title, description, link, category, videoUrl });
+    return res.status(201).json({ Alert: "Created" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ Error: err.message });
+  }
   })
   .get(async (req, res) => {
     const selectedType = req?.params?.type;

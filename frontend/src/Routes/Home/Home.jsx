@@ -78,7 +78,7 @@ const Home = () => {
                       Your browser does not support the video tag.
                     </video>
                     <div className="timestamps">
-                      <h1>{item.video.timstamps}</h1>
+                      <h1>{item.timstamps}</h1>
                     </div>
                   </div>
                   {item.video.link && (

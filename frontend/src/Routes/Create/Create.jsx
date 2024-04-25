@@ -7,23 +7,23 @@ const Create = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    video: { link: null, timestamps: [] },
+    video: null,
+    timestamps: [],
     link: "",
     category: "",
   });
 
-  async function AddContent(e) {
+  async function addContent(e) {
     e.preventDefault();
     try {
       setLoading(true);
       const formDataToSend = new FormData();
       formDataToSend.append("title", formData.title);
       formDataToSend.append("description", formData.description);
-      formDataToSend.append("video", formData.video.link); // Use formData.video.link for the file URL
+      formDataToSend.append("video", formData.video);
       formDataToSend.append("link", formData.link);
       formDataToSend.append("category", formData.category);
-      // Append each content point in the timestamps array
-      formData.video.timestamps.forEach((point, index) => {
+      formData.timestamps.forEach((point, index) => {
         formDataToSend.append(`timestamps[${index}]`, point);
       });
       await Axios.post(`${BASE}/mains`, formDataToSend);
@@ -35,25 +35,30 @@ const Create = () => {
   }
 
   const handleChange = (e) => {
-    if (e.target.name === "video") {
-      // Bind the file to video.link
-      setFormData({
-        ...formData,
-        video: { ...formData.video, link: e.target.files[0] },
-      });
-    } else if (e.target.name === "timestamps") {
-      // Handle changes in the timestamps array
-      const timestamps = [...formData.video.timestamps];
-      timestamps[e.target.dataset.index] = e.target.value;
-      setFormData({ ...formData, video: { ...formData.video, timestamps } });
+    const { name, value, files, dataset } = e.target;
+    if (name === "video") {
+      setFormData({ ...formData, video: files[0] });
+    } else if (name === "timestamps") {
+      const index = dataset.index;
+      const newTimestamps = [...formData.timestamps];
+      newTimestamps[index] = value;
+      setFormData({ ...formData, timestamps: newTimestamps });
     } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData({ ...formData, [name]: value });
     }
   };
+
+  const handleAddTimestamp = () => {
+    setFormData({
+      ...formData,
+      timestamps: [...formData.timestamps, ""],
+    });
+  };
+
   return (
     <div>
       <h1>Add Content</h1>
-      <form onSubmit={AddContent}>
+      <form onSubmit={addContent}>
         <div>
           <label>Title:</label>
           <input
@@ -91,26 +96,29 @@ const Create = () => {
             {/* Add more options as needed */}
           </select>
         </div>
-        <div className="video">
+        <div>
           <label>Video:</label>
-          <p>Video must contain clear instructions and accurate timestamps</p>
           <input name="video" type="file" onChange={handleChange} />
         </div>
-        {/* Render input fields for content points */}
-        {formData.video.timestamps.map((point, index) => (
-          <div key={index}>
-            <label>Content Point:</label>
-            <input
-              name="timestamps"
-              data-index={index}
-              placeholder="Enter content point"
-              type="text"
-              value={point}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        ))}
+        <div>
+          <label>Timestamps:</label>
+          {formData.timestamps.map((point, index) => (
+            <div key={index}>
+              <input
+                name="timestamps"
+                data-index={index}
+                placeholder="Enter timestamp"
+                type="text"
+                value={point}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          ))}
+          <button type="button" onClick={handleAddTimestamp}>
+            Add Timestamp
+          </button>
+        </div>
         <div>
           <label>Link:</label>
           <input
