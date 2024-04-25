@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { useState, useContext, createContext, useEffect } from "react";
+import React, { useState, useContext, createContext, useEffect, Suspense } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Routes/Home/Home";
 import NotFound from "./Routes/NotFound/NotFound";
-import Register from "./Routes/Manage/Register/Register";
-import Login from "./Routes/Manage/Login/Login";
-import Nav from "./Routes/Navbar/Nav";
-import Create from "./Routes/Create/Create";
-import Search from "./Routes/Search/Search";
 import Logo from "./Routes/Logo/Logo";
+
+// Lazy load your route components
+const Home = React.lazy(() => import("./Routes/Home/Home"));
+const Register = React.lazy(() => import("./Routes/Manage/Register/Register"));
+const Login = React.lazy(() => import("./Routes/Manage/Login/Login"));
+const Nav = React.lazy(() => import("./Routes/Navbar/Nav"));
+const Create = React.lazy(() => import("./Routes/Create/Create"));
+const Search = React.lazy(() => import("./Routes/Search/Search"));
 
 export const UserContext = createContext();
 
@@ -40,17 +42,19 @@ function App() {
       <BrowserRouter>
         <UserContext.Provider value={theStates}>
           <Logo/>
-          <Nav />
-          <Search />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            {company.gmail && (
-              <Route path="/create" element={<Create />}></Route>
-            )}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Nav />
+            <Search />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              {company.gmail && (
+                <Route path="/create" element={<Create />}></Route>
+              )}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </UserContext.Provider>
       </BrowserRouter>
     </>
