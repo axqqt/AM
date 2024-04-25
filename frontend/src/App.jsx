@@ -4,6 +4,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from "./Routes/NotFound/NotFound";
 import Logo from "./Routes/Logo/Logo";
+import Procedure from "./Routes/Procedure/Procedure";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -49,6 +50,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/procedure" element={<Procedure/>}></Route>
               {company.gmail && (
                 <Route path="/create" element={<Create />}></Route>
               )}
