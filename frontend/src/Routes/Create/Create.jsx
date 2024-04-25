@@ -54,68 +54,74 @@ const Create = () => {
     <div>
       <h1>Add Content</h1>
       <form onSubmit={AddContent}>
-        <input
-          name="title"
-          placeholder="Enter title"
-          type="text"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        ></input>
-        <input
-          name="description"
-          placeholder="Enter description"
-          type="text"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        ></input>
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select category</option>
-          <option value="clothing">Clothing</option>
-          <option value="health">Health Care</option>
-          <option value="beauty">Beauty</option>
-          {/* Add more options as needed */}
-        </select>
-        <div className="video">
-          <label>
-            Video must contain clear instructions and accurate timestamps{" "}
-          </label>
-          <label>Select Category</label>
+        <div>
+          <label>Title:</label>
           <input
-            name="video"
-            placeholder="Enter Video"
-            type="file"
-            onChange={handleChange}
-           
-          ></input>
-        </div>
-        {/* Render input fields for content points */}
-        {formData.video.timestamps.map((point, index) => (
-          <input
-            key={index}
-            name="timestamps"
-            data-index={index}
-            placeholder="Enter content point"
+            name="title"
+            placeholder="Enter title"
             type="text"
-            value={point}
+            value={formData.title}
             onChange={handleChange}
             required
           />
+        </div>
+        <div>
+          <label>Description:</label>
+          <input
+            name="description"
+            placeholder="Enter description"
+            type="text"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Category:</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="all">All</option>
+            <option value="clothing">Clothing</option>
+            <option value="health">Health Care</option>
+            <option value="beauty">Beauty</option>
+            {/* Add more options as needed */}
+          </select>
+        </div>
+        <div className="video">
+          <label>Video:</label>
+          <p>Video must contain clear instructions and accurate timestamps</p>
+          <input name="video" type="file" onChange={handleChange} />
+        </div>
+        {/* Render input fields for content points */}
+        {formData.video.timestamps.map((point, index) => (
+          <div key={index}>
+            <label>Content Point:</label>
+            <input
+              name="timestamps"
+              data-index={index}
+              placeholder="Enter content point"
+              type="text"
+              value={point}
+              onChange={handleChange}
+              required
+            />
+          </div>
         ))}
-        <input
-          name="link"
-          placeholder="Enter Link"
-          type="text"
-          value={formData.link}
-          onChange={handleChange}
-          required
-        ></input>
+        <div>
+          <label>Link:</label>
+          <input
+            name="link"
+            placeholder="Enter Link"
+            type="text"
+            value={formData.link}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <button type="submit" disabled={loading}>
           Add
         </button>

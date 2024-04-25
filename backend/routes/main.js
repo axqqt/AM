@@ -42,7 +42,7 @@ Router.route("/")
   })
   .get(async (req, res) => {
     const selectedType = req?.params?.type;
-    if (!selectedType) {
+    if (!selectedType || selectedType==="all") {
       try {
         const data = await mainModel.find();
         if (data && data.length) {

@@ -44,6 +44,7 @@ const Feedback = () => {
         </button>
       </form>
       <h3>{status}</h3>
+      <a href="#top" >Back to the top</a>
     </div>
   );
 };

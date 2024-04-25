@@ -2,7 +2,7 @@
 * {
   font-family: "Poppins", Courier, monospace;
   text-align: center;
-  transition: all 0.3s ease; /* Transition all properties over 0.3 seconds with ease timing function */
+  
 }
 
 .card {
