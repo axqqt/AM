@@ -20,7 +20,7 @@ function App() {
   useEffect(()=>{
     setTimeout(()=>{
       setStatus("")
-    },1200)
+    },2000)
   },[status])
 
   const theStates = {

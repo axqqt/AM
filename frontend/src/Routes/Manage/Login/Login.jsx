@@ -27,7 +27,7 @@ const Login = () => {
         setCompany(response?.data); 
         console.log(response.data)
 
-        setStatus(`${response.data.username} Logged in!`);
+        setStatus(`${response.data.gmail} Logged in!`);
         setTimeout(() => {
           navigator("/");
         }, 1200);

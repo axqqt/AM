@@ -21,6 +21,11 @@ const mainSchema = new mongoose.Schema({
         default:"default",
         min:5,trim:true,max:20
     },
+    commission:{
+        type:String,
+        default:"default",
+        min:5,trim:true,max:20
+    }
 })
 
 const mainModel = mongoose.model("mains",mainSchema);
