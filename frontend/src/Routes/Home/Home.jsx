@@ -51,18 +51,18 @@ const Home = () => {
       {loading ? (
         "Loading..."
       ) : (
-        <div className="card" >
+        <div className="card">
           {data.length > 0 ? (
             data.map((item) => (
-              <div key={item._id} className="container" style={{margin:"40px"}}>
-                <h1 >{item.title}</h1>
+              <div key={item._id} className="container" style={{ margin: "40px" }}>
+                <h1>{item.title}</h1>
                 <h2>{item.description}</h2>
-                <h3 style={{color:"black"}}> Commission rate : {item.commission}</h3>
-                <video width="320" height="240" controls>
-                  <source src={item.video} type="video/mp4" />
+                <h3 style={{ color: "black" }}> Commission rate : {item.commission}</h3>
+                <div className="vid"><video width="320" height="240" controls>
+                  <source src={item.video.link} type="video/mp4" />
                   Your browser does not support the video tag.
-                </video>
-          { item.link && <Link to={item.link}>{`Click here to get started with ${item.title}`}</Link>}
+                </video><div className="timestamps"><h1>{item.video.timestamps}</h1></div></div>
+                {item.video.link && <Link to={item.video.link}>{`Click here to get started with ${item.title}`}</Link>}
               </div>
             ))
           ) : (
@@ -74,6 +74,8 @@ const Home = () => {
       {company.gmail && <Link to={"/create"}>Click here to add</Link>}
     </div>
   );
+  
+
 };
 
 export default Home;

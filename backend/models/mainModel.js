@@ -9,8 +9,14 @@ const mainSchema = new mongoose.Schema({
         min:5,trim:true,max:20
     },
     video:{
-        type:String,
-        min:5,trim:true,max:20
+        link:{
+            type:String,
+            min:5,trim:true,max:20
+        },
+        timestamps:{
+            type:[String],
+            default:[]
+        }
     },
     link:{
         type:String,
