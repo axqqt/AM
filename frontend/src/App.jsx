@@ -8,6 +8,7 @@ import Register from "./Routes/Manage/Register/Register";
 import Login from "./Routes/Manage/Login/Login";
 import Nav from "./Routes/Navbar/Nav";
 import Create from "./Routes/Create/Create";
+import Search from "./Routes/Search/Search";
 
 export const UserContext = createContext();
 
@@ -17,11 +18,11 @@ function App() {
   const [status, setStatus] = useState("");
   const BASE = "http://localhost:8000";
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      setStatus("")
-    },2000)
-  },[status])
+  useEffect(() => {
+    setTimeout(() => {
+      setStatus("");
+    }, 2000);
+  }, [status]);
 
   const theStates = {
     loading,
@@ -38,11 +39,14 @@ function App() {
       <BrowserRouter>
         <UserContext.Provider value={theStates}>
           <Nav />
+          <Search />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            {company.gmail && <Route path="/create" element={<Create/>}></Route>}
+            {company.gmail && (
+              <Route path="/create" element={<Create />}></Route>
+            )}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </UserContext.Provider>

@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
-*{
-  font-family: 'Poppins', Courier, monospace;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  font-family: "Poppins", Courier, monospace;
   text-align: center;
+  transition: all 0.3s ease; /* Transition all properties over 0.3 seconds with ease timing function */
 }
 
-
-.card{
-border: 12px solid purple;
+.card {
+  border: 12px solid purple;
 }

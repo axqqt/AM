@@ -50,7 +50,7 @@ const Register = () => {
           </button>
         </form>
         <h2>{status}</h2>
-        <Link to="/login">Already a user? Log in</Link>
+        <Link to="/login">Already an user? Log in</Link>
       </div>
     </div>
   );

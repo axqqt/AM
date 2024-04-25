@@ -27,9 +27,10 @@ const Feedback = () => {
   }
 
   return (
-    <div>
+    <div id="feedback">
       <h1>Feedback</h1>
       <h2>We would really appreciate your feedback for improvement!</h2>
+      <h3>Do NOT worry , its completely anonymous!</h3>
       <form onSubmit={AddFeedback}>
         <input
           onChange={(e) => {
