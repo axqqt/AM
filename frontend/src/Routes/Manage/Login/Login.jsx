@@ -24,9 +24,10 @@ const Login = () => {
       setLoading(true);
       const response = await Axios.post(`${BASE}/users/login`, creds);
       if (response.status === 200) {
-        setCompany(response?.data?.user);
+        setCompany(response?.data); 
+        console.log(response.data)
 
-        setStatus(`${response.data.user.username} Logged in!`);
+        setStatus(`${response.data.username} Logged in!`);
         setTimeout(() => {
           navigator("/");
         }, 1200);

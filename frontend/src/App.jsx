@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useContext, createContext } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Routes/Home/Home";
@@ -16,6 +16,12 @@ function App() {
   const [company, setCompany] = useState({ gmail: "", password: "" });
   const [status, setStatus] = useState("");
   const BASE = "http://localhost:8000";
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setStatus("")
+    },1200)
+  },[status])
 
   const theStates = {
     loading,

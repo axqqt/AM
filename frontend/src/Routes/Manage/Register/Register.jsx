@@ -24,11 +24,12 @@ const Register = () => {
           navigator("/login");
           setStatus("");
         }, 1200);
-      } else if(response.status===409){
-        setStatus(`${gmail} already taken!`)
       }
   
     } catch (err) {
+      if(err.status===409){
+        setStatus(`${gmail} already taken!`)
+      }
       // if(err.status===409){
       //   setStatus(`${gmail} already taken!`)
       // }

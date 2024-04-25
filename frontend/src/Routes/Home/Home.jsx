@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import Axios from "axios";
@@ -8,12 +7,11 @@ const Home = () => {
   const { company, loading, setLoading, BASE, status, setStatus } =
     useContext(UserContext);
   const [data, setData] = useState([]);
-  const [selectedType, setSelectedType] = useState(""); // State to store the selected type
+  const [selectedType, setSelectedType] = useState("");
 
   async function fetchContent() {
     try {
       setLoading(true);
-      // You can modify the URL to include the selected type if needed
       const response = await Axios.get(`${BASE}/mains?type=${selectedType}`);
       if (response.status === 200) {
         setData(response.data);
@@ -31,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchContent();
-  }, [selectedType]); // Fetch content whenever the selected type changes
+  }, [selectedType]);
 
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
@@ -39,31 +37,29 @@ const Home = () => {
 
   return (
     <div className="company">
-      <h1>{company.gmail ? "Welcome Back!" : "Welcome to Affiliated"}</h1>
-      {/* Dropdown menu for selecting the type */}
-      <select value={selectedType} onChange={handleTypeChange}>
-        <option value="">Select type</option>
-        <option value="type1">Type 1</option>
-        <option value="type2">Type 2</option>
-        <option value="type3">Type 3</option>
-        {/* Add more options as needed */}
-      </select>
+      <h1>{company.gmail ? "Welcome Back! 👋🏻" : "Welcome to Affiliated 💸"}</h1>
+      <div className="selector">
+        <select value={selectedType} onChange={handleTypeChange}>
+          <option value="all">Select type</option>
+          <option value="type1">Type 1</option>
+          <option value="type2">Type 2</option>
+          <option value="type3">Type 3</option>
+        </select>
+      </div>
       {loading ? (
         "Loading..."
       ) : (
-        <div className="data">
+        <div className="card" >
           {data.length > 0 ? (
-            data.map((x) => (
-              <div key={x._id} className="container">
-                <h1>{x.title}</h1>
-                <h2>{x.description}</h2>
-                {/* Render video */}
+            data.map((item) => (
+              <div key={item._id} className="container" style={{margin:"40px"}}>
+                <h1>{item.title}</h1>
+                <h2>{item.description}</h2>
                 <video width="320" height="240" controls>
-                  <source src={x.video} type="video/mp4" />
+                  <source src={item.video} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-                {/* Link to view more */}
-                <Link to={x.link}>{`Click here to view more ${x.title}`}</Link>
+          { item.link && <Link to={item.link}>{`Click here to get started with ${item.title}`}</Link>}
               </div>
             ))
           ) : (
@@ -72,6 +68,7 @@ const Home = () => {
         </div>
       )}
       <h2>{status}</h2>
+      {company.gmail && <Link to={"/create"}>Click here to add</Link>}
     </div>
   );
 };
