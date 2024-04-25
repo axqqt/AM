@@ -29,13 +29,13 @@ Router.route("/login").post(async (req, res) => {
     return res.status(400).json({ Alert: "Gmail and password required" });
 
   try {
-    const user = await userModel.findOne({ gmail });
-    if (!user) {
+    const company = await userModel.findOne({ gmail });
+    if (!company) {
       return res.status(401).json({ Alert: "User not found" });
     }
     // Compare the passwords directly (not recommended for production)
-    if (password === user.password) {
-      return res.status(200).json(user);
+    if (password === company.password) {
+      return res.status(200).json(company);
     } else {
       return res.status(401).json({ Alert: "Wrong password" });
     }

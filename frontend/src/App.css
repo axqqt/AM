@@ -2,7 +2,8 @@
 * {
   font-family: "Poppins", Courier, monospace;
   text-align: center;
-  
+  scroll-behavior: smooth;
+transition-behavior: inherit;
 }
 
 .card {
