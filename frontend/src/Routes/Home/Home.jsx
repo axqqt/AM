@@ -73,7 +73,7 @@ const Home = () => {
         </div>
       )}
       <h2>{status}</h2>
-      {company.gmail && <Link to={"/create"}>Click here to add</Link>}
+      {company.gmail && <Link to={"/create"}>ADD YOUR LISTINGS!</Link>}
       <div className="footer">        <div className="footer"><Feedback/></div></div>
     </div>
   );
