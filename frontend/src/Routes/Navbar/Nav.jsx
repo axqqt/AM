@@ -9,7 +9,7 @@ const Nav = () => {
   return (
     <ul>
       <Link to={"/"}>Home</Link>
-
+      <Link to={"/procedure"}>How to get started</Link>
       {!company.gmail && (
         <div>
           <Link to={"/login"}>Login</Link>

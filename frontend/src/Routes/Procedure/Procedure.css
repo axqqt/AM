@@ -1,0 +1,10 @@
+.procedure-container {
+  width: 70%; /* Adjust width as needed */
+  margin: 0 auto; /* Center horizontally */
+  text-align: center; /* Center overall content */
+  margin: 60px;
+}
+
+.procedure-container ol {
+  text-align: left; /* Align text to the left within the list */
+}

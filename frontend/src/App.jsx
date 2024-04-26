@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext, createContext, useEffect, Suspense } from "react";
-import "./App.css";
+// import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from "./Routes/NotFound/NotFound";
 import Logo from "./Routes/Logo/Logo";

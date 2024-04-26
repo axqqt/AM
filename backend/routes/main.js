@@ -23,25 +23,25 @@ cloudinary.config({
 
 Router.route("/")
   .post(async (req, res) => {
-  // Check if required fields are provided
-  const { title, description, link, category } = req.body;
-  const { file:video } = req;
+    // Check if required fields are provided
+    const { title, description, link, category, commission } = req.body;
+    const { file: video } = req;
 
-  if (!title || !description || !link || !category || !video)
-    return res.status(400).json({ Alert: "Required fields not filled" });
+    if (!title || !description || !link || !category || !video || !commission)
+      return res.status(400).json({ Alert: "Required fields not filled" });
 
-  try {
-    // Upload video to Cloudinary
-    const result = await cloudinary.uploader.upload(video.path, { resource_type: 'video' });
-    const videoUrl = result.secure_url;
+    try {
+      // Upload video to Cloudinary
+      const result = await cloudinary.uploader.upload(video.path, { resource_type: 'video' });
+      const videoUrl = result.secure_url;
 
-    // Create the document in the database
-    await mainModel.create({ title, description, link, category, videoUrl });
-    return res.status(201).json({ Alert: "Created" });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ Error: err.message });
-  }
+      // Create the document in the database
+      await mainModel.create({ title, description, link, category, videoUrl, commission });
+      return res.status(201).json({ Alert: "Created" });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ Error: err.message });
+    }
   })
   .get(async (req, res) => {
     const selectedType = req?.params?.type;

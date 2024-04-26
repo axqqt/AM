@@ -32,6 +32,7 @@ const Create = () => {
       formData.timestamps.forEach((point, index) => {
         formDataToSend.append(`timestamps[${index}]`, point);
       });
+      console.log(formDataToSend);
       await Axios.post(`${BASE}/mains`, formDataToSend).then((response) => {
         if (response.status === 201) {
           setStatus("Content Added");
@@ -144,7 +145,7 @@ const Create = () => {
           />
         </div>
         <div>
-          <label>Commission:</label> {/* Adding commission input field */}
+          <label>Commission:</label>
           <input
             name="commission"
             placeholder="Enter Commission"
