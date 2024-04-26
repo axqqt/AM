@@ -7,7 +7,7 @@ import Create from "../Create/Create";
 const Nav = () => {
   const { company } = useContext(UserContext);
   return (
-    <ul>
+    <ul >
       <Link to={"/"}>Home</Link>
       <Link to={"/procedure"}>How to get started</Link>
       {!company.gmail && (

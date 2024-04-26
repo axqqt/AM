@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../../App";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+// import jwt_decode from 'jwt-decode'; 
 
 const Login = () => {
   const {
@@ -24,10 +25,17 @@ const Login = () => {
       setLoading(true);
       const response = await Axios.post(`${BASE}/users/login`, creds);
       if (response.status === 200) {
-        setCompany(response?.data); 
-        console.log(response.data)
-
-        setStatus(`${response.data.gmail} Logged in!`);
+        const { token, company } = response.data;
+  
+        // Store JWT in local storage
+        localStorage.setItem('token', token);
+  
+        // Optionally, you can decode the token to access user information
+        // const decodedToken = jwt_decode(token);
+        // console.log(decodedToken);
+  
+        setCompany(company); 
+        setStatus(`${company.gmail} Logged in!`);
         setTimeout(() => {
           navigator("/");
         }, 1200);

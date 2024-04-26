@@ -4,6 +4,7 @@ const mainModel = require("../models/mainModel");
 const multer = require("multer");
 // const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
 
 cloudinary.config({
   cloud_name: "dsto9mmt0",
@@ -26,8 +27,9 @@ Router.route("/")
     // Check if required fields are provided
     const { title, description, link, category, commission } = req.body;
     const { file: video } = req;
+    console.log(req.body);
 
-    if (!title || !description || !link || !category || !video || !commission)
+    if (!title || !description || !link || !category || !commission)
       return res.status(400).json({ Alert: "Required fields not filled" });
 
     try {

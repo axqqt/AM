@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { UserContext } from "../../App";
 import Axios from "axios";
@@ -114,7 +115,7 @@ const Create = () => {
           <label>Video:</label>
           <input name="video" type="file" onChange={handleChange} />
         </div>
-        <div>
+        {/* <div>
           <label>Timestamps:</label>
           {formData.timestamps.map((point, index) => (
             <div key={index}>
@@ -132,7 +133,7 @@ const Create = () => {
           <button type="button" onClick={handleAddTimestamp}>
             Add Timestamp
           </button>
-        </div>
+        </div> */}
         <div>
           <label>Link:</label>
           <input
