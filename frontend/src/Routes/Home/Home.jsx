@@ -103,9 +103,7 @@ const Home = () => {
         <h2>{status}</h2>
       </div>
 
-      <footer className="footer" style={{margin:"40px"}}>
-        <Feedback />
-      </footer>
+
     </div>
   );
 };

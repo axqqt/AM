@@ -5,6 +5,11 @@ import { UserContext } from "../../App";
 const Nav = () => {
   const { company } = useContext(UserContext);
 
+  function Logout() {
+    localStorage.removeItem("company");
+    window.location.reload();
+}
+
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex items-center justify-between">
@@ -12,6 +17,7 @@ const Nav = () => {
           <Link to="/" className="text-white font-bold">
             Home
           </Link>
+          <button onClick={Logout}>{localStorage.getItem("company") && "Logout"}</button>
           <Link to="/procedure" className="text-white ml-4">
             How to get started
           </Link>
@@ -33,6 +39,7 @@ const Nav = () => {
             </Link>
           )}
         </div>
+
       </div>
     </nav>
   );

@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import NotFound from "./Routes/NotFound/NotFound";
 import Logo from "./Routes/Logo/Logo";
 import Procedure from "./Routes/Procedure/Procedure";
+import Feedback from "./Routes/Feedback/Feedback";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -48,6 +49,8 @@ function App({location}) {
     setStatus,
   };
 
+
+
   // If you want to clear company data on certain routes, you can do it here
   useEffect(() => {
     if (location.pathname === "/logout") {
@@ -60,6 +63,7 @@ function App({location}) {
       
         <UserContext.Provider value={theStates}>
           <Logo/>
+        
           <Suspense fallback={<div>Loading...</div>}>
             <Nav />
             {/* <Search /> */}
@@ -73,7 +77,11 @@ function App({location}) {
               )}
               <Route path="*" element={<NotFound />} />
             </Routes>
+            
           </Suspense>
+          <footer className="footer" style={{margin:"40px"}}>
+        <Feedback />
+      </footer>
         </UserContext.Provider>
      
     </>
