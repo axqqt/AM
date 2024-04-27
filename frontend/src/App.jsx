@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState, useContext, createContext, useEffect, Suspense } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import NotFound from "./Routes/NotFound/NotFound";
 import Logo from "./Routes/Logo/Logo";
 import Procedure from "./Routes/Procedure/Procedure";
@@ -16,17 +16,27 @@ const Search = React.lazy(() => import("./Routes/Search/Search"));
 
 export const UserContext = createContext();
 
-function App() {
+function App({location}) {
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState({ gmail: "", password: "" });
+  const [company, setCompany] = useState(() => {
+    // Retrieve company data from localStorage on initial render
+    const storedCompany = localStorage.getItem("company");
+    return storedCompany ? JSON.parse(storedCompany) : { gmail: "", password: "" };
+  });
   const [status, setStatus] = useState("");
   const BASE = "http://localhost:8000";
+  location = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
       setStatus("");
     }, 2000);
   }, [status]);
+
+  useEffect(() => {
+    // Save company data to localStorage whenever it changes
+    localStorage.setItem("company", JSON.stringify(company));
+  }, [company]);
 
   const theStates = {
     loading,
@@ -38,9 +48,16 @@ function App() {
     setStatus,
   };
 
+  // If you want to clear company data on certain routes, you can do it here
+  useEffect(() => {
+    if (location.pathname === "/logout") {
+      setCompany({ gmail: "", password: "" });
+    }
+  }, [location.pathname, setCompany]);
+
   return (
     <>
-      <BrowserRouter>
+      
         <UserContext.Provider value={theStates}>
           <Logo/>
           <Suspense fallback={<div>Loading...</div>}>
@@ -58,7 +75,7 @@ function App() {
             </Routes>
           </Suspense>
         </UserContext.Provider>
-      </BrowserRouter>
+     
     </>
   );
 }

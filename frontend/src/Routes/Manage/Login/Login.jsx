@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
-import { useContext, useState } from "react";
-import { UserContext } from "../../../App";
+import  { useContext, useState } from "react";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-// import jwt_decode from 'jwt-decode'; 
+import { UserContext } from "../../../App";
 
 const Login = () => {
   const {
@@ -12,7 +10,6 @@ const Login = () => {
     status,
     setStatus,
     BASE,
-
     setCompany,
   } = useContext(UserContext);
   const [creds, setCreds] = useState({ gmail: "", password: "" });
@@ -26,15 +23,11 @@ const Login = () => {
       const response = await Axios.post(`${BASE}/users/login`, creds);
       if (response.status === 200) {
         const { token, company } = response.data;
-  
+
         // Store JWT in local storage
         localStorage.setItem('token', token);
-  
-        // Optionally, you can decode the token to access user information
-        // const decodedToken = jwt_decode(token);
-        // console.log(decodedToken);
-  
-        setCompany(company); 
+
+        setCompany(company);
         setStatus(`${company.gmail} Logged in!`);
         setTimeout(() => {
           navigator("/");
@@ -72,7 +65,7 @@ const Login = () => {
             <input
               onChange={handleChange}
               name="gmail"
-              placeholder="Enter gmail..."
+              placeholder="Enter email..."
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -96,7 +89,7 @@ const Login = () => {
             disabled={loading}
             className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
         <div className="mt-4 text-center">

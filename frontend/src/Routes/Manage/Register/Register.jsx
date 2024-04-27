@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 
 const Register = () => {
-  const { loading, setLoading, status, setStatus, BASE } = useContext(UserContext);
+  const { loading, setLoading, status, setStatus, BASE } =
+    useContext(UserContext);
   const [gmail, setGmail] = useState("");
   const navigator = useNavigate();
 
@@ -33,8 +34,8 @@ const Register = () => {
   }
 
   return (
-    <div>
-      <div className="Register">
+    <div className="register-container">
+      <div className="register-form">
         <h1>Register</h1>
         <form onSubmit={userRegister}>
           <input
@@ -42,15 +43,15 @@ const Register = () => {
             value={gmail}
             onChange={(e) => setGmail(e.target.value)}
             name="gmail"
-            placeholder="Enter gmail..."
+            placeholder="Enter email..."
             required
           />
           <button type="submit" disabled={loading}>
-            Register
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
         <h2>{status}</h2>
-        <Link to="/login">Already an user? Log in</Link>
+        <Link to="/login">Already a user? Log in</Link>
       </div>
     </div>
   );

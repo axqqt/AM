@@ -1,9 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 * {
   font-family: "Poppins", Courier, monospace;
   text-align: center;
   scroll-behavior: smooth;
-transition-behavior: inherit;
+  transition-behavior: inherit;
+}
+
+/* Add margin to all direct children of the body */
+body > * {
+  margin: 20px; /* Adjust as needed */
 }
 
 .card {

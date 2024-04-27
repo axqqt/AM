@@ -21,7 +21,8 @@ body {
   }
   
   .card {
-    width: 300px; /* Adjust as needed */
+    width: max-content; /* Adjust as needed */
+    height: max-content;
     margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
