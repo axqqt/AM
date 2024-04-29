@@ -1,6 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 const Product = () => {
-  const { id } = useLocation();
+  const { id } = useParams();
 
   return (
     <div>
