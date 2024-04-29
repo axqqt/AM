@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useContext, createContext, useEffect, Suspense } from "react";
 import "./App.css";
@@ -6,6 +7,7 @@ import NotFound from "./Routes/NotFound/NotFound";
 import Logo from "./Routes/Logo/Logo";
 import Procedure from "./Routes/Procedure/Procedure";
 import Feedback from "./Routes/Feedback/Feedback";
+import Product from "./Routes/Product/Product";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -72,6 +74,7 @@ function App({location}) {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/procedure" element={<Procedure/>}></Route>
+              <Route path="/product/:id" element={<Product />} />
               {company.gmail && (
                 <Route path="/create" element={<Create />}></Route>
               )}
