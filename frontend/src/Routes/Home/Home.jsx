@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { UserContext } from "../../App";
 import "./Home.css";
-import Feedback from "../Feedback/Feedback";
+import HeroSection from "@/components/HeroSection";
+import ProductsSection from "@/components/ProductsSection";
+import FeedbackSection from "@/components/FeedbackSection";
 
 const Home = () => {
-  const { company, loading, setLoading, BASE, status, setStatus } =
-    useContext(UserContext);
+  const { company, loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
 
@@ -39,8 +40,12 @@ const Home = () => {
   };
 
   return (
-    <div className="home-container">
-      <header className="header">
+    <section className="h-full w-full">
+      
+        <HeroSection />
+        <ProductsSection />
+        <FeedbackSection />
+      {/* <header className="header">
         <div className="header-content">
           {company.gmail && <Link to={"/create"}>ADD YOUR LISTINGS!</Link>}
           <a href="#feedback">Provide Your Valuable Feedback!</a>
@@ -101,10 +106,10 @@ const Home = () => {
           </div>
         )}
         <h2>{status}</h2>
-      </div>
+      </div> */}
 
 
-    </div>
+    </section>
   );
 };
 

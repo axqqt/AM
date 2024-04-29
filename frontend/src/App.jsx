@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext, createContext, useEffect, Suspense } from "react";
-import "./App.css";
+import "./index.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import NotFound from "./Routes/NotFound/NotFound";
-import Logo from "./Routes/Logo/Logo";
+
 import Procedure from "./Routes/Procedure/Procedure";
-import Feedback from "./Routes/Feedback/Feedback";
+import Footer from "./components/Footer";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -59,11 +59,10 @@ function App({location}) {
   }, [location.pathname, setCompany]);
 
   return (
-    <>
+    <section className="bg-black flex flex-col justify-center items-center">
       
         <UserContext.Provider value={theStates}>
-          <Logo/>
-        
+         
           <Suspense fallback={<div>Loading...</div>}>
             <Nav />
             {/* <Search /> */}
@@ -79,12 +78,10 @@ function App({location}) {
             </Routes>
             
           </Suspense>
-          <footer className="footer" style={{margin:"40px"}}>
-        <Feedback />
-      </footer>
+          
         </UserContext.Provider>
-     
-    </>
+     <Footer/>
+    </section>
   );
 }
 
