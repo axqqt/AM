@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { UserContext } from "../../App";
+import { Button } from "@/components/ui/button";
 import Axios from "axios";
 
 const Search = () => {
@@ -29,19 +30,20 @@ const Search = () => {
   }
 
   return (
-    <div style={{margin:"40px"}}>
-      <h1>Search</h1>
-      <form onSubmit={Search}>
+    <div className="mx-6 flex justify-between items-center">
+     
+      <form onSubmit={Search} className="flex justify-between  gap-3">
         <input
           onChange={(e) => {
             setSearch(e.target.value);
           }}
+          className="p-2 rounded-lg"
           placeholder="Search Here..."
           type="text"
         ></input>
-        <button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading}>
           Search...
-        </button>
+        </Button>
       </form>
     </div>
   );

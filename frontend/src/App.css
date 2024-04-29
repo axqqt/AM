@@ -4,14 +4,12 @@
   font-family: "Poppins", Courier, monospace;
   text-align: center;
   scroll-behavior: smooth;
-  transition-behavior: inherit;
+  
 }
 
 /* Add margin to all direct children of the body */
 body > * {
   margin: 20px; /* Adjust as needed */
+  
 }
 
-.card {
-  border: 12px solid purple;
-}

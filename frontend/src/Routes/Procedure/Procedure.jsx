@@ -3,7 +3,7 @@ import "./Procedure.css"; // Import CSS file for styling
 
 const Procedure = () => {
   return (
-    <div className="procedure-container">
+    <div className="procedure-container text-white h-screen">
       {" "}
       {/* Apply a class for styling */}
       <h1>Procedure of Affiliate Marketing</h1>
